@@ -14,6 +14,16 @@ const ChatPage = ({ socket }) => {
     socket.on('messageResponse', (data) => setMessages([...messages, data]));
   }, [socket, messages]);
 
+  // Fetching the messages from the API route
+  useEffect(() => {
+    function fetchMessages() {
+      fetch('https://chat-app-node-back.onrender.com/api')
+        .then((response) => response.json())
+        .then((data) => setMessages(data.messages));
+    }
+    fetchMessages();
+  }, []);
+
   useEffect(() => {
     // 👇️ scroll to bottom every time messages change
     lastMessageRef.current?.scrollIntoView({ behavior: 'smooth' });
