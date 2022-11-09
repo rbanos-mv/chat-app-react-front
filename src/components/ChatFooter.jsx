@@ -1,6 +1,7 @@
 /* eslint-disable react/forbid-prop-types */
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import checkPageStatus from '../utils/functions';
 
 const ChatFooter = ({ socket }) => {
   const [message, setMessage] = useState('');
@@ -16,6 +17,7 @@ const ChatFooter = ({ socket }) => {
         id: `${socket.id}${Math.random()}`,
         socketID: socket.id,
       });
+      checkPageStatus(message, localStorage.getItem('userName'));
     }
     setMessage('');
   };
